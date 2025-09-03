@@ -1,3 +1,7 @@
+@font-face {
+        font-family: 'Tazugane'; src: url('fonts/Tazugane\ Gothic.ttf')
+    }
+
 @keyframes fall {
     0% {
         transform: translateY(0) translateX(0) rotate(0deg);
@@ -21,31 +25,74 @@
 html, body {
     height: 100%;
     margin: 0;
-     background-color: #e3e1d0;
+    overflow: hidden;
 }
 
-.row>*{
-    padding: 0 !important;
+body{
+    background-image: url(img/background.png);
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-color: #e3e1d0;
+    position: relative;
+}
+
+.col-6.col-md-3 {
+    pointer-events: none;
+}
+
+#sun{
+    position: absolute;
+    top: -2%;
+    right: -7%;
+    width: 35%;
+}
+
+#cloud{
+    position: absolute;
+    top: 9%;
+    right: -27%;
+    width: 60%;
+}
+#cloud2{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 48%;
 }
 
 .container-fluid {
     height: 100%;
 }
 
-#selectedHiragana{
-    border: solid green 2px;
+#selectedHiragana {
+  font-size: 12em;
+  font-family: Tazugane;
+  position: absolute;
+  top: 22%;
+  pointer-events: none;
 }
 
-#selectedHiragana img{
-    width: 100%;
-    
+#score{
+    margin-top: 45%;
+    margin-bottom: 5%;
+    font-size: 1.1em;
+    font-weight: bolder;
+    color: #f77c97;
 }
 
-.choice{
+#choices { user-select: none; }
+.choice {
+    pointer-events: auto;
     cursor: pointer;
-    border: solid red 2px;
+    background-color: #f77c97;
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto; /* centraliza dentro da coluna */
+    touch-action: manipulation; /* melhora toques */
 }
-
 
 
 /**/

@@ -5,7 +5,7 @@ let hiragana = {
   "え": { checked: false, image: "", pronunciation: "E" },
   "お": { checked: false, image: "", pronunciation: "O" },
 
-  /*"か": { checked: false, image: "", pronunciation: "KA" },
+  "か": { checked: false, image: "", pronunciation: "KA" },
   "き": { checked: false, image: "", pronunciation: "KI" },
   "く": { checked: false, image: "", pronunciation: "KU" },
   "け": { checked: false, image: "", pronunciation: "KE" },
@@ -54,19 +54,19 @@ let hiragana = {
   "わ": { checked: false, image: "", pronunciation: "WA" },
   "を": { checked: false, image: "", pronunciation: "WO" },
 
-  "ん": { checked: false, image: "", pronunciation: "N" }*/
+  "ん": { checked: false, image: "", pronunciation: "N" }
 }
 
 
 const selectedHiragana = document.getElementById("selectedHiragana")
 const choices = document.querySelectorAll("#choices .choice")
+const choicesContainer = document.getElementById("choices");
 let currentAnswer = "";
 let score = 0;
 const scoreElement = document.getElementById("score");
 
 document.addEventListener("DOMContentLoaded", () => {
     sortHiragana()
-    console.log(Object.keys(hiragana).length);
 });
 
 
@@ -78,7 +78,8 @@ function sortHiragana(){
     if (value.checked === false){
         value.checked = true
 
-        selectedHiragana.innerHTML = `<img src="${value.image}" alt="${key}"/>`     
+        // selectedHiragana.innerHTML = `<img src="${value.image}" alt="${key}"/>` antes era imagem
+        selectedHiragana.innerHTML = key
         sortChoices(value)
     }
     
@@ -108,30 +109,27 @@ function sortChoices(value) {
 }
 
 
+choicesContainer.addEventListener("click", (e) => {
+  const choiceEl = e.target.closest(".choice");
+  if (!choiceEl || !choicesContainer.contains(choiceEl)) return; // clicou no gap: ignora
 
-//Tentativa de acerto
-choices.forEach(div => {
-    div.addEventListener("click", () => {
-        if (div.innerText === currentAnswer) {
-            for (let key in hiragana) {
-              if (hiragana[key].pronunciation === currentAnswer) {
-                  hiragana[key].checked = true
-                  break
-              } 
-            }
-            score++
-            scoreElement.innerText = `${score}/46`;
-
-            if(score === Object.keys(hiragana).length){
-              win()
-            }
-            sortHiragana() 
-        } 
-        else{
-          gameover()
-        }
-    });
+  const text = choiceEl.innerText.trim();
+  if (text === currentAnswer) {
+    for (let key in hiragana) {
+      if (hiragana[key].pronunciation === currentAnswer) {
+        hiragana[key].checked = true;
+        break;
+      }
+    }
+    score++;
+    scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
+    if (score === Object.keys(hiragana).length) return win();
+    sortHiragana();
+  } else {
+    gameover();
+  }
 });
+
 
 function gameover() {
     alert("Você perdeu!");
@@ -168,13 +166,13 @@ function createPetal() {
 
   petal.style.left = `${Math.random() * 100}vw`;
 
-  const size = Math.random() * 14 + 13; 
+  const size = Math.random() * 14 + 14; 
   petal.style.width = `${size}px`;
 
   const drift = Math.random() * 40 - 20; 
   petal.style.setProperty("--drift", `${drift}vw`);
 
-  const duration = Math.random() * 2 + 2; 
+  const duration = Math.random() * 2 + 3; 
   petal.style.animationDuration = `${duration}s`;
 
   const rotation = Math.random() * 360;
@@ -184,4 +182,4 @@ function createPetal() {
 
   setTimeout(() => petal.remove(), duration * 1000);
 }
-setInterval(createPetal, 400);
+setInterval(createPetal, 460);
