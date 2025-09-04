@@ -190,24 +190,16 @@ body{
 
 /*Breakpoints*/
 
-/* mobile pequeno */
-/* @media (max-width: 376px) {
-  #selectedHiragana {
-    font-size: 12em;
-    top: 35%;
-    }
-} */
+@media only screen and (min-width : 580px) {
 
+  #selectedHiragana{
+    font-size: 10em;
+  }
 
-/* mobile padrão */
-/* @media (max-width: 768px) {
-  #selectedHiragana {
-    font-size: 13em;
-    top: 17%;
-    }
-} */
+  .choice {
+    font-size: 1.4em;
+}
 
-
-
+}
 
 /**/

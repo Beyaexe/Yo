@@ -158,8 +158,8 @@ choicesContainer.addEventListener("click", (e) => {
     if (score === Object.keys(hiragana).length) return win()
     sortHiragana();
   } else {
-    // playSound("sounds/fail.mp3")
-    // gameover();
+    playSound("sounds/fail.mp3")
+    gameover();
   }
 
 });
