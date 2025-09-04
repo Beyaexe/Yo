@@ -1,4 +1,5 @@
 let hiragana = {
+
   "あ": { checked: false, image: "img/あ.png", pronunciation: "A" },
   "い": { checked: false, image: "img/い.png", pronunciation: "I" },
   "う": { checked: false, image: "", pronunciation: "U" },
@@ -58,6 +59,18 @@ let hiragana = {
 }
 
 
+let sounds = {
+  '1-5': "sounds/1-5.mp3",
+  '6-10': "sounds/6-10.mp3",
+  '11-22': "sounds/11-22.mp3",
+  '23': "sounds/23.mp3",
+  '24-35': "sounds/24-35.mp3",
+  '36-45': "sounds/36-45.mp3",
+  '46': "sounds/44.mp3",
+  'fail': "sounds/fail.mp3"
+};
+
+
 const selectedHiragana = document.getElementById("selectedHiragana")
 const choices = document.querySelectorAll("#choices .choice")
 const choicesContainer = document.getElementById("choices");
@@ -66,7 +79,15 @@ let score = 0;
 const scoreElement = document.getElementById("score");
 
 document.addEventListener("DOMContentLoaded", () => {
-    sortHiragana()
+  sortHiragana()
+
+  //Iniciar a música
+  document.addEventListener("click", () => {
+    backgroundMusic = new Audio("sounds/music.mp3");
+    backgroundMusic.loop = true;       // repete
+    backgroundMusic.volume = 0.3;      // volume mais baixo
+    backgroundMusic.play();
+  }, { once: true }); //
 });
 
 
@@ -77,12 +98,14 @@ function sortHiragana(){
     const [key, value] = caracteres[randomNumber];
     if (value.checked === false){
         value.checked = true
-
         // selectedHiragana.innerHTML = `<img src="${value.image}" alt="${key}"/>` antes era imagem
-        selectedHiragana.innerHTML = key
         sortChoices(value)
     }
-    
+
+    //resetar animação fade
+    selectedHiragana.innerHTML = key;
+    animationFade(selectedHiragana, "fade-in");
+
 }
 
 function sortChoices(value) {
@@ -104,10 +127,10 @@ function sortChoices(value) {
             div.innerText = vWrong.pronunciation
             count++
         }
+        animationFade(div, "fade-in")
     })
-
+    
 }
-
 
 choicesContainer.addEventListener("click", (e) => {
   const choiceEl = e.target.closest(".choice");
@@ -121,23 +144,29 @@ choicesContainer.addEventListener("click", (e) => {
         break;
       }
     }
+
     score++;
+
+    let soundKey = getSound(score);
+    if (soundKey) playSound(sounds[soundKey]);
+
     scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
-    if (score === Object.keys(hiragana).length) return win();
+
+    if (score === Object.keys(hiragana).length) return win()
     sortHiragana();
   } else {
+    playSound("sounds/fail.mp3")
     gameover();
   }
+
 });
 
 
 function gameover() {
-    alert("Você perdeu!");
     resetGame()
 }
 
 function win() {
-    alert("Ganhou");
     resetGame()
 }
 
@@ -183,3 +212,27 @@ function createPetal() {
   setTimeout(() => petal.remove(), duration * 1000);
 }
 setInterval(createPetal, 460);
+
+
+//Animação de fade
+function animationFade(el, animationClass) {
+  el.classList.remove(animationClass);
+  void el.offsetWidth; // força reflow
+  el.classList.add(animationClass);
+}
+
+//Som ao acerto
+function playSound(src) {
+  const audio = new Audio(src);
+  audio.play();
+}
+
+//Descobrir qual som usar
+function getSound(score) {
+  return Object.keys(sounds).find(key => {
+    if (key.includes('-')) {
+      return score >= +key.split('-')[0] && score <= +key.split('-')[1];
+    }
+    return +key === score;
+  });
+}

@@ -22,6 +22,22 @@
     }
 }
 
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -90,8 +106,9 @@ body{
     font-size: 1.5em;
     text-align: center;
     width: 90%;
-    margin: 0 auto; /* centraliza dentro da coluna */
-    touch-action: manipulation; /* melhora toques */
+    margin: 0 auto;
+    touch-action: manipulation; 
+    box-shadow: 10px 10px 5px lightblue;
 }
 
 
@@ -116,3 +133,34 @@ body{
     animation: fall linear infinite;
 }
 
+/*Breakpoints*/
+
+/* mobile pequeno */
+/* @media (max-width: 376px) {
+  #selectedHiragana {
+    font-size: 12em;
+    top: 35%;
+    }
+} */
+
+@media (max-width: 390px) {
+  #selectedHiragana {
+    font-size: 12em;
+    top: 22%;
+    }
+}
+
+@media (max-width: 376px) {
+  #selectedHiragana {
+    font-size: 10em;
+    top: 21%;
+    }
+}
+
+/* mobile padrão */
+/* @media (max-width: 768px) {
+  #selectedHiragana {
+    font-size: 13em;
+    top: 17%;
+    }
+} */
