@@ -60,8 +60,8 @@ let hiragana = {
 
 
 let sounds = {
-  '1-5': "sounds/1-5.mp3",
-  '6-10': "sounds/6-10.mp3",
+  '1-4': "sounds/1-5.mp3",
+  '5-10': "sounds/6-10.mp3",
   '11-22': "sounds/11-22.mp3",
   '23': "sounds/23.mp3",
   '24-35': "sounds/24-35.mp3",
@@ -77,6 +77,8 @@ const choicesContainer = document.getElementById("choices");
 let currentAnswer = "";
 let score = 0;
 const scoreElement = document.getElementById("score");
+const hitMessage = document.getElementById('hitMessage');
+
 
 document.addEventListener("DOMContentLoaded", () => {
   sortHiragana()
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", () => {
     backgroundMusic = new Audio("sounds/music.mp3");
     backgroundMusic.loop = true;       // repete
-    backgroundMusic.volume = 0.3;      // volume mais baixo
+    backgroundMusic.volume = 0.1;      // volume mais baixo
     backgroundMusic.play();
   }, { once: true }); //
 });
@@ -138,6 +140,12 @@ choicesContainer.addEventListener("click", (e) => {
 
   const text = choiceEl.innerText.trim();
   if (text === currentAnswer) {
+    score++;
+    let soundKey = getSound(score);
+    if (soundKey) playSound(sounds[soundKey]);
+    showHitMessage(score)
+
+
     for (let key in hiragana) {
       if (hiragana[key].pronunciation === currentAnswer) {
         hiragana[key].checked = true;
@@ -145,18 +153,13 @@ choicesContainer.addEventListener("click", (e) => {
       }
     }
 
-    score++;
-
-    let soundKey = getSound(score);
-    if (soundKey) playSound(sounds[soundKey]);
-
     scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
 
     if (score === Object.keys(hiragana).length) return win()
     sortHiragana();
   } else {
-    playSound("sounds/fail.mp3")
-    gameover();
+    // playSound("sounds/fail.mp3")
+    // gameover();
   }
 
 });
@@ -171,7 +174,7 @@ function win() {
 }
 
 function resetGame(){
-
+  
   // coloca animações ou seja o que for aqui ou no gameover, ver qual é melhor
 
   for (let key in hiragana) {
@@ -189,6 +192,7 @@ const petalContainer = document.getElementById('petal-container')
 const petalImages = ["img/petal.png", "img/petal2.png", "img/petal3.png"];
 
 function createPetal() {
+  if (petalContainer.children.length > 20) return; // evita excesso
   const petal = document.createElement("img");
   petal.src = petalImages[Math.floor(Math.random() * petalImages.length)];
   petal.classList.add("petal");
@@ -235,4 +239,23 @@ function getSound(score) {
     }
     return +key === score;
   });
+}
+
+
+
+function showHitMessage(score) {
+  let msg = "";
+  if (score === 5) msg = "5 acertos!";
+  else if (score === 10) msg = "10 acertos, continue assim!";
+  else if (score === 15) msg = "15! Quem é você?";
+  else if (score === 23) msg = "Metade! Gambateee!!";
+  else if (score === 30) msg = "";
+
+  if (!msg) return;
+
+  hitMessage.textContent = msg;
+
+  hitMessage.classList.remove("show");
+  void hitMessage.offsetWidth; 
+  hitMessage.classList.add("show");
 }

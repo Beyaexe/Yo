@@ -1,6 +1,9 @@
 @font-face {
         font-family: 'Tazugane'; src: url('fonts/Tazugane\ Gothic.ttf')
     }
+ @font-face {
+        font-family: 'Noto Serif'; src: url('fonts/Noto\ Serif.ttf')
+}
 
 @keyframes fall {
     0% {
@@ -37,6 +40,34 @@
   }
 }
 
+@keyframes zoomFade {
+  0% {
+    transform: rotate(-30deg) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    transform: rotate(-30deg) scale(1.2);
+    opacity: 1;
+  }
+  40% {
+    transform: rotate(-30deg) scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: rotate(-30deg) scale(1.2);
+    opacity: 1;
+  }
+  80% {
+    transform: rotate(-30deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-30deg) scale(1);
+    opacity: 0;
+  }
+}
+
+
 
 html, body {
     height: 100%;
@@ -72,8 +103,8 @@ body{
 }
 #cloud2{
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 1%;
+    left: 1%;
     width: 48%;
 }
 
@@ -84,14 +115,15 @@ body{
 #selectedHiragana {
   font-size: 12em;
   font-family: Tazugane;
-  position: absolute;
-  top: 22%;
+  /* position: absolute;
+  top: 22%; */
   pointer-events: none;
+  line-height: 0.9em;
 }
 
 #score{
-    margin-top: 45%;
-    margin-bottom: 5%;
+    margin-top: 5%;
+    margin-bottom: 10%;
     font-size: 1.1em;
     font-weight: bolder;
     color: #f77c97;
@@ -103,12 +135,32 @@ body{
     cursor: pointer;
     background-color: #f77c97;
     color: white;
-    font-size: 1.5em;
+    font-size: 1.7em;
     text-align: center;
     width: 90%;
     margin: 0 auto;
     touch-action: manipulation; 
-    box-shadow: 10px 10px 5px lightblue;
+    box-shadow: 8px 8px 5px lightblue;
+    font-family: Noto Serif;
+}
+
+.hit-message {
+  position: absolute;
+  top: 18%;
+  width: 40%;
+  left: 4%;
+  line-height: 1em;
+  transform: rotate(-30deg);
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  overflow-wrap: break-word;
+  
+}
+
+.hit-message.show {
+  animation: zoomFade 2s ease forwards;
 }
 
 
@@ -130,6 +182,9 @@ body{
     width: 30px;
     height: auto;
     opacity: 1;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transition: transform 0.1s linear;
     animation: fall linear infinite;
 }
 
@@ -143,19 +198,6 @@ body{
     }
 } */
 
-@media (max-width: 390px) {
-  #selectedHiragana {
-    font-size: 12em;
-    top: 22%;
-    }
-}
-
-@media (max-width: 376px) {
-  #selectedHiragana {
-    font-size: 10em;
-    top: 21%;
-    }
-}
 
 /* mobile padrão */
 /* @media (max-width: 768px) {
@@ -164,3 +206,8 @@ body{
     top: 17%;
     }
 } */
+
+
+
+
+/**/
