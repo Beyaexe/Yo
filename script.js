@@ -1,64 +1,64 @@
 let hiragana = {
+  "あ": { checked: false, pronunciation: "A" },
+  "い": { checked: false, pronunciation: "I" },
+  "う": { checked: false, pronunciation: "U" },
+  "え": { checked: false, pronunciation: "E" },
+  "お": { checked: false, pronunciation: "O" },
 
-  "あ": { checked: false, image: "img/あ.png", pronunciation: "A" },
-  "い": { checked: false, image: "img/い.png", pronunciation: "I" },
-  "う": { checked: false, image: "", pronunciation: "U" },
-  "え": { checked: false, image: "", pronunciation: "E" },
-  "お": { checked: false, image: "", pronunciation: "O" },
+  "か": { checked: false, pronunciation: "KA" },
+  "き": { checked: false, pronunciation: "KI" },
+  "く": { checked: false, pronunciation: "KU" },
+  "け": { checked: false, pronunciation: "KE" },
+  "こ": { checked: false, pronunciation: "KO" },
 
-  "か": { checked: false, image: "", pronunciation: "KA" },
-  "き": { checked: false, image: "", pronunciation: "KI" },
-  "く": { checked: false, image: "", pronunciation: "KU" },
-  "け": { checked: false, image: "", pronunciation: "KE" },
-  "こ": { checked: false, image: "", pronunciation: "KO" },
+  "さ": { checked: false, pronunciation: "SA" },
+  "し": { checked: false, pronunciation: "SHI" },
+  "す": { checked: false, pronunciation: "SU" },
+  "せ": { checked: false, pronunciation: "SE" },
+  "そ": { checked: false, pronunciation: "SO" },
 
-  "さ": { checked: false, image: "", pronunciation: "SA" },
-  "し": { checked: false, image: "", pronunciation: "SHI" },
-  "す": { checked: false, image: "", pronunciation: "SU" },
-  "せ": { checked: false, image: "", pronunciation: "SE" },
-  "そ": { checked: false, image: "", pronunciation: "SO" },
+  "た": { checked: false, pronunciation: "TA" },
+  "ち": { checked: false, pronunciation: "CHI" },
+  "つ": { checked: false, pronunciation: "TSU" },
+  "て": { checked: false, pronunciation: "TE" },
+  "と": { checked: false, pronunciation: "TO" },
 
-  "た": { checked: false, image: "", pronunciation: "TA" },
-  "ち": { checked: false, image: "", pronunciation: "CHI" },
-  "つ": { checked: false, image: "", pronunciation: "TSU" },
-  "て": { checked: false, image: "", pronunciation: "TE" },
-  "と": { checked: false, image: "", pronunciation: "TO" },
+  "な": { checked: false, pronunciation: "NA" },
+  "に": { checked: false, pronunciation: "NI" },
+  "ぬ": { checked: false, pronunciation: "NU" },
+  "ね": { checked: false, pronunciation: "NE" },
+  "の": { checked: false, pronunciation: "NO" },
 
-  "な": { checked: false, image: "", pronunciation: "NA" },
-  "に": { checked: false, image: "", pronunciation: "NI" },
-  "ぬ": { checked: false, image: "", pronunciation: "NU" },
-  "ね": { checked: false, image: "", pronunciation: "NE" },
-  "の": { checked: false, image: "", pronunciation: "NO" },
+  "は": { checked: false, pronunciation: "HA" },
+  "ひ": { checked: false, pronunciation: "HI" },
+  "ふ": { checked: false, pronunciation: "FU" },
+  "へ": { checked: false, pronunciation: "HE" },
+  "ほ": { checked: false, pronunciation: "HO" },
 
-  "は": { checked: false, image: "", pronunciation: "HA" },
-  "ひ": { checked: false, image: "", pronunciation: "HI" },
-  "ふ": { checked: false, image: "", pronunciation: "FU" },
-  "へ": { checked: false, image: "", pronunciation: "HE" },
-  "ほ": { checked: false, image: "", pronunciation: "HO" },
+  "ま": { checked: false, pronunciation: "MA" },
+  "み": { checked: false, pronunciation: "MI" },
+  "む": { checked: false, pronunciation: "MU" },
+  "め": { checked: false, pronunciation: "ME" },
+  "も": { checked: false, pronunciation: "MO" },
 
-  "ま": { checked: false, image: "", pronunciation: "MA" },
-  "み": { checked: false, image: "", pronunciation: "MI" },
-  "む": { checked: false, image: "", pronunciation: "MU" },
-  "め": { checked: false, image: "", pronunciation: "ME" },
-  "も": { checked: false, image: "", pronunciation: "MO" },
+  "や": { checked: false, pronunciation: "YA" },
+  "ゆ": { checked: false, pronunciation: "YU" },
+  "よ": { checked: false, pronunciation: "YO" },
 
-  "や": { checked: false, image: "", pronunciation: "YA" },
-  "ゆ": { checked: false, image: "", pronunciation: "YU" },
-  "よ": { checked: false, image: "", pronunciation: "YO" },
+  "ら": { checked: false, pronunciation: "RA" },
+  "り": { checked: false, pronunciation: "RI" },
+  "る": { checked: false, pronunciation: "RU" },
+  "れ": { checked: false, pronunciation: "RE" },
+  "ろ": { checked: false, pronunciation: "RO" },
 
-  "ら": { checked: false, image: "", pronunciation: "RA" },
-  "り": { checked: false, image: "", pronunciation: "RI" },
-  "る": { checked: false, image: "", pronunciation: "RU" },
-  "れ": { checked: false, image: "", pronunciation: "RE" },
-  "ろ": { checked: false, image: "", pronunciation: "RO" },
+  "わ": { checked: false, pronunciation: "WA" },
+  "を": { checked: false, pronunciation: "WO" },
 
-  "わ": { checked: false, image: "", pronunciation: "WA" },
-  "を": { checked: false, image: "", pronunciation: "WO" },
-
-  "ん": { checked: false, image: "", pronunciation: "N" }
-}
+  "ん": { checked: false, pronunciation: "N" }
+};
 
 
+/*Áudios*/
 let sounds = {
   '1-4': "sounds/1-5.mp3",
   '5-10': "sounds/6-10.mp3",
@@ -66,11 +66,28 @@ let sounds = {
   '23': "sounds/23.mp3",
   '24-35': "sounds/24-35.mp3",
   '36-45': "sounds/36-45.mp3",
-  '46': "sounds/44.mp3",
-  'fail': "sounds/fail.mp3"
+  // '46': "sounds/46.mp3",
+  'fail': "sounds/fail.mp3",
+  'gameover': "sounds/gameover.mp3",
+  'Sadness and Sorrow': "sounds/Sadness and Sorrow.mp3"
 };
 
+// Cache de áudios
+const audioCache = {};
+for (let key in sounds) {
+  const audio = new Audio(sounds[key]);
+  audio.preload = "auto";  
+  audioCache[key] = audio;
+}
 
+// Música de fundo
+const backgroundMusic = new Audio("sounds/music.mp3");
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.1;
+backgroundMusic.preload = "auto";
+
+
+// Variáveis globais
 const selectedHiragana = document.getElementById("selectedHiragana")
 const choices = document.querySelectorAll("#choices .choice")
 const choicesContainer = document.getElementById("choices");
@@ -80,16 +97,21 @@ const scoreElement = document.getElementById("score");
 const hitMessage = document.getElementById('hitMessage');
 
 
+//Iniciar o carregamento
 document.addEventListener("DOMContentLoaded", () => {
   sortHiragana()
 
   //Iniciar a música
+  // document.addEventListener("click", () => {
+  //   backgroundMusic = new Audio("sounds/music.mp3");
+  //   backgroundMusic.loop = true;
+  //   backgroundMusic.volume = 0.1; // volume mais baixo
+  //   backgroundMusic.play();
+  // }, { once: true });
   document.addEventListener("click", () => {
-    backgroundMusic = new Audio("sounds/music.mp3");
-    backgroundMusic.loop = true;       // repete
-    backgroundMusic.volume = 0.1;      // volume mais baixo
-    backgroundMusic.play();
-  }, { once: true }); //
+  backgroundMusic.play();
+}, { once: true });
+
 });
 
 
@@ -100,7 +122,6 @@ function sortHiragana(){
     const [key, value] = caracteres[randomNumber];
     if (value.checked === false){
         value.checked = true
-        // selectedHiragana.innerHTML = `<img src="${value.image}" alt="${key}"/>` antes era imagem
         sortChoices(value)
     }
 
@@ -142,7 +163,9 @@ choicesContainer.addEventListener("click", (e) => {
   if (text === currentAnswer) {
     score++;
     let soundKey = getSound(score);
-    if (soundKey) playSound(sounds[soundKey]);
+    // if (soundKey) playSound(sounds[soundKey]);
+    if (soundKey) playSound(soundKey); // antigo: playSound(sounds[soundKey])
+
     showHitMessage(score)
 
 
@@ -156,21 +179,22 @@ choicesContainer.addEventListener("click", (e) => {
     scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
 
     if (score === Object.keys(hiragana).length) return win()
-    sortHiragana();
+    sortHiragana()
   } else {
-    playSound("sounds/fail.mp3")
-    gameover();
+    playSound('fail')
+    resetGame()
   }
 
 });
 
 
 function gameover() {
-    resetGame()
+  playSound('gameover')
+  resetGame()
 }
 
 function win() {
-    resetGame()
+  resetGame()
 }
 
 function resetGame(){
@@ -191,10 +215,17 @@ function resetGame(){
 const petalContainer = document.getElementById('petal-container')
 const petalImages = ["img/petal.png", "img/petal2.png", "img/petal3.png"];
 
+// Pré-carrega as imagens
+const petalImgs = petalImages.map(src => {
+  const img = new Image();
+  img.src = src;
+  return img;
+});
+
 function createPetal() {
-  if (petalContainer.children.length > 20) return; // evita excesso
+  if (petalContainer.children.length > 20) return; 
   const petal = document.createElement("img");
-  petal.src = petalImages[Math.floor(Math.random() * petalImages.length)];
+  petal.src = petalImgs[Math.floor(Math.random() * petalImgs.length)].src; 
   petal.classList.add("petal");
 
   petal.style.left = `${Math.random() * 100}vw`;
@@ -215,6 +246,7 @@ function createPetal() {
 
   setTimeout(() => petal.remove(), duration * 1000);
 }
+
 setInterval(createPetal, 460);
 
 
@@ -226,10 +258,14 @@ function animationFade(el, animationClass) {
 }
 
 //Som ao acerto
-function playSound(src) {
-  const audio = new Audio(src);
+function playSound(key) {
+  const audio = audioCache[key];
+  if (!audio) return;
+  audio.currentTime = 0; // reinicia o áudio
   audio.play();
 }
+
+
 
 //Descobrir qual som usar
 function getSound(score) {
@@ -240,7 +276,6 @@ function getSound(score) {
     return +key === score;
   });
 }
-
 
 
 function showHitMessage(score) {
@@ -259,3 +294,17 @@ function showHitMessage(score) {
   void hitMessage.offsetWidth; 
   hitMessage.classList.add("show");
 }
+
+// let seconds = 0;
+// const maxTime = 150;
+
+// const timer = setInterval(() => {
+//   seconds++;
+//   scoreElement.innerText = `Tempo: ${seconds}s`; // atualiza layout se quiser
+
+//   if (seconds >= maxTime) {
+//     clearInterval(timer);
+//     gameover(); // chama sua função de game over
+//   }
+// }, 1000); // roda a cada 1 segundo
+

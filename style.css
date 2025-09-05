@@ -114,10 +114,9 @@ body{
 }
 
 #selectedHiragana {
-  font-size: 12em;
+  /* font-size: 12em; */
+  font-size: 52vw;
   font-family: Tazugane;
-  /* position: absolute;
-  top: 22%; */
   pointer-events: none;
   line-height: 0.9em;
 }
@@ -185,13 +184,33 @@ body{
     opacity: 1;
     pointer-events: none;
     will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translate3d(0,0,0);
     transition: transform 0.1s linear;
     animation: fall linear infinite;
 }
 
 /*Breakpoints*/
 
-@media only screen and (min-width : 580px) {
+@media (min-width: 375px) {
+  #selectedHiragana{
+    font-size: 43vw;
+    margin-top: 8%;
+  }
+}
+
+@media (min-width: 414px) {
+  #selectedHiragana {
+    margin-top: -2%;
+    font-size: 12.5em;
+  }
+  .choice {
+    font-size: 1.5em;
+  }
+  
+}
+
+/* @media only screen and (min-width : 580px) {
 
   #selectedHiragana{
     font-size: 10em;
@@ -203,17 +222,81 @@ body{
 
 }
 
-/**/
 
-@media only screen and (min-width : 400px) {
-  #cloud{
-    
+@media only screen and (min-width : 375px) {
+  #selectedHiragana{
+    margin-top: 12%;
+    font-size: 9.5em;
   }
-
   /* [data-aos][data-aos][data-aos^=fade] {
   opacity: 1 !important;
-  } */
+  } 
 
+} */
+
+/* @media (min-width: 360px) {
+  #selectedHiragana {
+    margin-top: 3%;
+    font-size: 10.5em;
+  }
+  .choice {
+    font-size: 1.3em;
+  }
+  
 }
+
+@media (min-width: 375px) {
+  #selectedHiragana {
+    margin-top: 7%;
+    font-size: 9.5em;
+  }
+  .choice {
+    font-size: 1.3em;
+  }
+  
+}
+
+@media (min-width: 390px) {
+  #selectedHiragana {
+    font-size: 11.5em;
+  }
+  .choice {
+    font-size: 1.5em;
+  }
+  
+}
+
+@media (min-width: 412px) {
+  #selectedHiragana {
+    margin-top: -5%;
+    font-size: 13em;
+  }
+  .choice {
+    font-size: 1.5em;
+  }
+  
+}
+
+@media (min-width: 414px) {
+  #selectedHiragana {
+    margin-top: 2%;
+    font-size: 12.5em;
+  }
+  .choice {
+    font-size: 1.5em;
+  }
+  
+}
+
+
+@media (min-width: 580px) {
+  #selectedHiragana {
+    font-size: 10em;
+  }
+  .choice {
+    font-size: 1.4em;
+  }
+} */
+
 
 
