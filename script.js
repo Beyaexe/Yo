@@ -82,7 +82,7 @@ for (let key in sounds) {
 // Música de fundo
 const backgroundMusic = new Audio("sounds/music.mp3")
 backgroundMusic.loop = true
-backgroundMusic.volume = 0.035
+backgroundMusic.volume = 0.025
 backgroundMusic.preload = "auto"
 
 // Música game over
@@ -194,8 +194,8 @@ choicesContainer.addEventListener("click", (e) => {
     sortHiragana()
   } else {
     imgNezuko.src = "img/nezukoApprehensive.png"
-    // playSound('fail')
-    // resetGame()
+    playSound('fail')
+    resetGame()
   }
 
 });
