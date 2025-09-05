@@ -174,7 +174,6 @@ choicesContainer.addEventListener("click", (e) => {
   if (text === currentAnswer) {
     score++;
     if (score === Object.keys(hiragana).length) return win()
-    if (score === 1) return win()
 
     let soundKey = getSound(score);
     if (soundKey) playSound(soundKey); 
@@ -195,8 +194,8 @@ choicesContainer.addEventListener("click", (e) => {
     sortHiragana()
   } else {
     imgNezuko.src = "img/nezukoApprehensive.png"
-    playSound('fail')
-    resetGame()
+    // playSound('fail')
+    // resetGame()
   }
 
 });
