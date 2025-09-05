@@ -83,9 +83,13 @@ for (let key in sounds) {
 // Música de fundo
 const backgroundMusic = new Audio("sounds/music.mp3");
 backgroundMusic.loop = true;
-backgroundMusic.volume = 0.1;
+backgroundMusic.volume = 0.085;
 backgroundMusic.preload = "auto";
 
+// Música game over
+const gameOverMusic = new Audio("sounds/Sadness and Sorrow.mp3");
+gameOverMusic.volume = 0.8
+gameOverMusic.preload = "auto";
 
 // Variáveis globais
 const selectedHiragana = document.getElementById("selectedHiragana")
@@ -95,6 +99,9 @@ let currentAnswer = "";
 let score = 0;
 const scoreElement = document.getElementById("score");
 const hitMessage = document.getElementById('hitMessage');
+let seconds = 60;
+const timeRemaining = document.getElementById('timer')
+const imgNezuko = nezuko.querySelector('img');
 
 
 //Iniciar o carregamento
@@ -102,15 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
   sortHiragana()
 
   //Iniciar a música
-  // document.addEventListener("click", () => {
-  //   backgroundMusic = new Audio("sounds/music.mp3");
-  //   backgroundMusic.loop = true;
-  //   backgroundMusic.volume = 0.1; // volume mais baixo
-  //   backgroundMusic.play();
-  // }, { once: true });
   document.addEventListener("click", () => {
-  backgroundMusic.play();
-}, { once: true });
+  backgroundMusic.play()
+  timerRun()
+}, { once: true })
 
 });
 
@@ -119,7 +121,7 @@ function sortHiragana(){
     let caracteres = Object.entries(hiragana).filter(([k, v]) => v.checked === false)
     const randomNumber = Math.floor(Math.random() * caracteres.length)
 
-    const [key, value] = caracteres[randomNumber];
+    const [key, value] = caracteres[randomNumber]
     if (value.checked === false){
         value.checked = true
         sortChoices(value)
@@ -127,13 +129,12 @@ function sortHiragana(){
 
     //resetar animação fade
     selectedHiragana.innerHTML = key;
-    animationFade(selectedHiragana, "fade-in");
+    animationFade(selectedHiragana, "fade-in")
 
 }
 
 function sortChoices(value) {
-
-    currentAnswer = value.pronunciation; 
+    currentAnswer = value.pronunciation
 
     const correctIndex = Math.floor(Math.random() * choices.length)
     choices[correctIndex].innerText = value.pronunciation
@@ -163,11 +164,10 @@ choicesContainer.addEventListener("click", (e) => {
   if (text === currentAnswer) {
     score++;
     let soundKey = getSound(score);
-    // if (soundKey) playSound(sounds[soundKey]);
-    if (soundKey) playSound(soundKey); // antigo: playSound(sounds[soundKey])
+    if (soundKey) playSound(soundKey); 
 
     showHitMessage(score)
-
+    imgNezuko.src = "img/nezukoHappy.png"
 
     for (let key in hiragana) {
       if (hiragana[key].pronunciation === currentAnswer) {
@@ -181,6 +181,7 @@ choicesContainer.addEventListener("click", (e) => {
     if (score === Object.keys(hiragana).length) return win()
     sortHiragana()
   } else {
+    imgNezuko.src = "img/nezukoApprehensive.png"
     playSound('fail')
     resetGame()
   }
@@ -189,8 +190,17 @@ choicesContainer.addEventListener("click", (e) => {
 
 
 function gameover() {
-  playSound('gameover')
-  resetGame()
+  if (backgroundMusic) {
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+  }
+
+  playSound('gameover', 0.4)
+  gameOverMusic.play()
+  document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
+  .forEach(el => el.style.display = 'none');
+  
+  document.getElementById('gameOverContainer').style.display = 'flex';
 }
 
 function win() {
@@ -199,14 +209,30 @@ function win() {
 
 function resetGame(){
   
-  // coloca animações ou seja o que for aqui ou no gameover, ver qual é melhor
-
   for (let key in hiragana) {
     hiragana[key].checked = false
   }
   score = 0;
   scoreElement.innerText = `${score}/46`;
   sortHiragana()
+}
+
+function restartGame(){
+gameOverMusic.pause()
+gameOverMusic.currentTime = 0;
+
+document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
+  .forEach(el => el.style.display = 'flex');
+
+  document.getElementById('gameOverContainer').style.display = 'none'; 
+
+  backgroundMusic.loop = true
+  backgroundMusic.volume = 0.085
+  backgroundMusic.play()
+
+  seconds = 60
+  timeRemaining.innerText = `Tempo restante: ${seconds}s`
+  timerRun()
 }
 
 
@@ -258,10 +284,11 @@ function animationFade(el, animationClass) {
 }
 
 //Som ao acerto
-function playSound(key) {
+function playSound(key, volume = 1) {
   const audio = audioCache[key];
   if (!audio) return;
   audio.currentTime = 0; // reinicia o áudio
+  audio.volume = volume
   audio.play();
 }
 
@@ -295,16 +322,18 @@ function showHitMessage(score) {
   hitMessage.classList.add("show");
 }
 
-// let seconds = 0;
-// const maxTime = 150;
 
-// const timer = setInterval(() => {
-//   seconds++;
-//   scoreElement.innerText = `Tempo: ${seconds}s`; // atualiza layout se quiser
+function timerRun(){
+  const timer = setInterval(() => {
+    console.log('tick'); // <- teste
+    seconds--;
+    timeRemaining.innerText = `Tempo restante: ${seconds}s`; // atualiza layout se quiser
 
-//   if (seconds >= maxTime) {
-//     clearInterval(timer);
-//     gameover(); // chama sua função de game over
-//   }
-// }, 1000); // roda a cada 1 segundo
+    if (seconds <= 0) {
+      clearInterval(timer);
+      gameover(); 
+    }
+  }, 1000);
+}
+
 

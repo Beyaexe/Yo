@@ -90,44 +90,57 @@ body{
 
 
 #sun{
-    position: absolute;
-    top: -2%;
-    right: -7%;
-    width: 35%;
+  position: absolute;
+  top: -2%;
+  right: -7%;
+  width: 35%;
 }
 
 #cloud{
-    position: absolute;
-    top: 9%;
-    right: -27%;
-    width: 60%;
+  position: absolute;
+  top: 9%;
+  right: -27%;
+  width: 60%;
 }
 #cloud2{
-    position: absolute;
-    top: 1%;
-    left: 1%;
-    width: 48%;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  width: 48%;
+}
+#nezuko{
+  position: absolute;
+  top: 45%;
+  right: 2%;
+  width: 17%;
 }
 
 .container-fluid {
     height: 100%;
 }
 
+
 #selectedHiragana {
-  /* font-size: 12em; */
   font-size: 52vw;
   font-family: Tazugane;
   pointer-events: none;
-  line-height: 0.9em;
+  line-height: 1em;
+  
 }
 
 #score{
-    margin-top: 5%;
-    margin-bottom: 10%;
-    font-size: 1.1em;
-    font-weight: bolder;
-    color: #f77c97;
+  margin-top: 5%;
+  font-size: 1.1em;
+  font-weight: bolder;
+  color: #f77c97;
 }
+
+#timer{
+  margin-bottom: 10%;
+  font-size: 1.1em;
+  font-weight: bolder;
+}
+
 
 #choices { user-select: none; }
 .choice {
@@ -162,6 +175,29 @@ body{
 .hit-message.show {
   animation: zoomFade 2s ease forwards;
 }
+
+
+#gameOverContainer{
+  display: none;
+}
+
+#gameOverContainer img{
+  width: 58%;
+  margin-bottom: 5%;
+}
+
+#restartBtn{
+  cursor: pointer;
+  width: 84%;
+  background-color: #f77c97;
+  color: white;
+  font-size: 1em;
+  touch-action: manipulation; 
+  border: none !important;
+  box-shadow: 8px 8px 5px lightblue;
+  font-family: Noto Serif;
+}
+
 
 
 /**/
