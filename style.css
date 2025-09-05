@@ -119,13 +119,11 @@ body{
     height: 100%;
 }
 
-
 #selectedHiragana {
   font-size: 52vw;
   font-family: Tazugane;
   pointer-events: none;
   line-height: 1em;
-  
 }
 
 #score{
@@ -186,6 +184,15 @@ body{
   margin-bottom: 5%;
 }
 
+#winContainer{
+  display: none;
+}
+
+#winContainer img{
+  width: 48%;
+  margin-bottom: 5%;
+}
+
 #restartBtn{
   cursor: pointer;
   width: 84%;
@@ -196,6 +203,10 @@ body{
   border: none !important;
   box-shadow: 8px 8px 5px lightblue;
   font-family: Noto Serif;
+}
+
+#restartBtn{
+  font-size: 0.97em;
 }
 
 

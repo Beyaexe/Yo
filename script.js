@@ -66,10 +66,9 @@ let sounds = {
   '23': "sounds/23.mp3",
   '24-35': "sounds/24-35.mp3",
   '36-45': "sounds/36-45.mp3",
-  // '46': "sounds/46.mp3",
   'fail': "sounds/fail.mp3",
-  'gameover': "sounds/gameover.mp3",
-  'Sadness and Sorrow': "sounds/Sadness and Sorrow.mp3"
+  'gameOverMusic': "sounds/gameOverMusic.mp3",
+  'win': "sounds/win.mp3"
 };
 
 // Cache de áudios
@@ -87,13 +86,10 @@ backgroundMusic.volume = 0.035
 backgroundMusic.preload = "auto"
 
 // Música game over
-const gameOverMusic = new Audio("sounds/Sadness and Sorrow.mp3")
+const gameOverMusic = new Audio("sounds/gameOverMusic.mp3")
 gameOverMusic.volume = 0.7
 gameOverMusic.preload = "auto"
 gameOverMusic.load()
-gameOverMusic.play()
-gameOverMusic.pause() 
-gameOverMusic.currentTime = 0
 
 // Variáveis globais
 const selectedHiragana = document.getElementById("selectedHiragana")
@@ -103,10 +99,11 @@ let currentAnswer = "";
 let score = 0;
 const scoreElement = document.getElementById("score");
 const hitMessage = document.getElementById('hitMessage');
-let seconds = 4;
+let seconds = 60;
 const timeRemaining = document.getElementById('timer')
 const imgNezuko = nezuko.querySelector('img');
-
+let timer = null; //isso é basicamente o contador, uma "instância dele"
+let checkContinue = true;
 
 //Iniciar o carregamento
 document.addEventListener("DOMContentLoaded", () => {
@@ -117,13 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
     timerRun();
     backgroundMusic.play()
 
-    // Uma tentativa de pré-desbloqueio da música de game over
-    gameOverMusic.play()
-      .then(() => {
-        gameOverMusic.pause();
-        gameOverMusic.currentTime = 0;
-      })
-      .catch(err => console.log("Erro ao preparar áudio:", err));
+    gameOverMusic.volume = 0; // muta só para liberar
+    gameOverMusic.play().then(() => {
+      // Depois de liberar, já reseta
+      gameOverMusic.pause();
+      gameOverMusic.currentTime = 0;
+      gameOverMusic.volume = 0.7; // volta volume real
+    }).catch(err => console.log("Erro ao preparar áudio:", err));
+
   }, { once: true });
 });
 
@@ -175,6 +173,9 @@ choicesContainer.addEventListener("click", (e) => {
   const text = choiceEl.innerText.trim();
   if (text === currentAnswer) {
     score++;
+    if (score === Object.keys(hiragana).length) return win()
+    if (score === 1) return win()
+
     let soundKey = getSound(score);
     if (soundKey) playSound(soundKey); 
 
@@ -190,7 +191,7 @@ choicesContainer.addEventListener("click", (e) => {
 
     scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
 
-    if (score === Object.keys(hiragana).length) return win()
+    
     sortHiragana()
   } else {
     imgNezuko.src = "img/nezukoApprehensive.png"
@@ -207,9 +208,8 @@ function gameover() {
     backgroundMusic.currentTime = 0;
   }
   setTimeout(() => {
-    playSound('gameover', 0.4)
     gameOverMusic.play();
-  }, 550);
+  }, 200);
 
 
   document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
@@ -219,11 +219,22 @@ function gameover() {
 }
 
 function win() {
-  resetGame()
+  checkContinue = false
+  if (backgroundMusic) {
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+  }
+  setTimeout(() => {
+    playSound('win')
+  }, 200)
+  document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
+  .forEach(el => el.style.display = 'none');
+  
+  document.getElementById('winContainer').style.display = 'flex';
 }
 
+
 function resetGame(){
-  
   for (let key in hiragana) {
     hiragana[key].checked = false
   }
@@ -233,6 +244,7 @@ function resetGame(){
 }
 
 function restartGame(){
+resetGame()
 gameOverMusic.pause()
 gameOverMusic.currentTime = 0;
 
@@ -240,12 +252,14 @@ document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container
   .forEach(el => el.style.display = 'flex');
 
   document.getElementById('gameOverContainer').style.display = 'none'; 
+  document.getElementById('winContainer').style.display = 'none'; 
 
   backgroundMusic.loop = true
   backgroundMusic.volume = 0.085
   backgroundMusic.play()
 
-  seconds = 60
+  checkContinue = true
+  seconds = 60;
   timeRemaining.innerText = `Tempo restante: ${seconds}s`
   timerRun()
 }
@@ -339,11 +353,13 @@ function showHitMessage(score) {
 
 
 function timerRun(){
-  const timer = setInterval(() => {
-    timeRemaining.innerText = `Tempo restante: ${seconds}s`; // atualiza layout se quiser
+  clearInterval(timer); 
+  timer = setInterval(() => {
+    if (!checkContinue) return; 
     seconds--;
+    timeRemaining.innerText = `Tempo restante: ${seconds}s`;
 
-    if (seconds <= 0) {
+    if (seconds < 0) {
       clearInterval(timer);
       gameover(); 
     }
