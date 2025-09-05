@@ -81,17 +81,19 @@ for (let key in sounds) {
 }
 
 // Música de fundo
-const backgroundMusic = new Audio("sounds/music.mp3");
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.085;
-backgroundMusic.preload = "auto";
+const backgroundMusic = new Audio("sounds/music.mp3")
+backgroundMusic.loop = true
+backgroundMusic.volume = 0.035
+backgroundMusic.preload = "auto"
 
 // Música game over
-const gameOverMusic = new Audio("sounds/Sadness and Sorrow.mp3");
-gameOverMusic.volume = 0.8
-gameOverMusic.preload = "auto";
-gameOverMusic.load();
-
+const gameOverMusic = new Audio("sounds/Sadness and Sorrow.mp3")
+gameOverMusic.volume = 0.7
+gameOverMusic.preload = "auto"
+gameOverMusic.load()
+gameOverMusic.play()
+gameOverMusic.pause() 
+gameOverMusic.currentTime = 0
 
 // Variáveis globais
 const selectedHiragana = document.getElementById("selectedHiragana")
@@ -110,13 +112,21 @@ const imgNezuko = nezuko.querySelector('img');
 document.addEventListener("DOMContentLoaded", () => {
   sortHiragana()
 
-  //Iniciar a música
   document.addEventListener("click", () => {
-  backgroundMusic.play()
-  timerRun()
-}, { once: true })
+    // Música de fundo
+    timerRun();
+    backgroundMusic.play()
 
+    // Uma tentativa de pré-desbloqueio da música de game over
+    gameOverMusic.play()
+      .then(() => {
+        gameOverMusic.pause();
+        gameOverMusic.currentTime = 0;
+      })
+      .catch(err => console.log("Erro ao preparar áudio:", err));
+  }, { once: true });
 });
+
 
 
 function sortHiragana(){
@@ -199,7 +209,7 @@ function gameover() {
   setTimeout(() => {
     playSound('gameover', 0.4)
     gameOverMusic.play();
-  }, 250);
+  }, 550);
 
 
   document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
@@ -330,9 +340,8 @@ function showHitMessage(score) {
 
 function timerRun(){
   const timer = setInterval(() => {
-    console.log('tick'); // <- teste
-    seconds--;
     timeRemaining.innerText = `Tempo restante: ${seconds}s`; // atualiza layout se quiser
+    seconds--;
 
     if (seconds <= 0) {
       clearInterval(timer);
