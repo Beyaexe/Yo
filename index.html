@@ -11,8 +11,12 @@
 <body>
     <div id="petal-container"></div>
     <div id="sun" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500"><img src="img/sun.png" class="w-100" alt="sun background"></div>
-    <div id="cloud" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500"><img src="img/cloud.png" class="w-100" alt="cloud background"></div>
-    <div id="cloud2" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500"><img src="img/cloud2.png" class="w-100" alt="cloud background"></div>
+    <!-- <div id="cloud" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500"><img src="img/cloud.png" class="img-fluid" alt="cloud background"></div> -->
+     <div id="cloud" data-aos="fade-left" data-aos-offset="200" data-aos-anchor-placement="top-bottom">
+  <img src="img/cloud.png" class="img-fluid" alt="cloud background">
+</div>
+
+    <div id="cloud2" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500"><img src="img/cloud2.png" class="img-fluid" alt="cloud background"></div>
     <div class="container-fluid h-100 d-flex flex-column align-items-center justify-content-center text-center">
         <!-- <div id="score">0/46</div> -->
 
@@ -43,7 +47,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-    AOS.init();
+    /*AOS.init({
+  offset: 120,      // distância para disparar (pode ajustar)
+  duration: 600,    // duração da animação
+});*/
+        AOS.init()
   </script>
     <script src="script.js"></script>
 </body>
