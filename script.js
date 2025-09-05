@@ -90,6 +90,8 @@ backgroundMusic.preload = "auto";
 const gameOverMusic = new Audio("sounds/Sadness and Sorrow.mp3");
 gameOverMusic.volume = 0.8
 gameOverMusic.preload = "auto";
+gameOverMusic.load();
+
 
 // Variáveis globais
 const selectedHiragana = document.getElementById("selectedHiragana")
@@ -99,7 +101,7 @@ let currentAnswer = "";
 let score = 0;
 const scoreElement = document.getElementById("score");
 const hitMessage = document.getElementById('hitMessage');
-let seconds = 60;
+let seconds = 4;
 const timeRemaining = document.getElementById('timer')
 const imgNezuko = nezuko.querySelector('img');
 
@@ -194,9 +196,12 @@ function gameover() {
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
   }
+  setTimeout(() => {
+    playSound('gameover', 0.4)
+    gameOverMusic.play();
+  }, 250);
 
-  playSound('gameover', 0.4)
-  gameOverMusic.play()
+
   document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
   .forEach(el => el.style.display = 'none');
   
