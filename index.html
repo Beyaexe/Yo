@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yo!</title>
-    <link rel="icon" type="image/png" href="img/あ.png">
+    <!-- <link rel="icon" type="image/png" href="img/あ.png"> -->
+    <link rel="icon" type="image/png" href="img/petal.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
@@ -44,15 +45,18 @@
       <!-- gameover -->
       <div id="gameOverContainer" class="container-fluid h-100 flex-column align-items-center justify-content-center text-center">
         <img src="img/nezukoCry.png" alt="Game Over" />
+                <div><strong>Score:</strong> <span id="finalScoreGameOver" class="finalScore"></span></div>
+
         <button id="restartBtn" onclick="restartGame()">Incendeie o seu coração! Enxugue as lágrimas e siga em frente.</button>
       </div>
 
       <!-- win -->
       <div id="winContainer" class="container-fluid h-100 flex-column align-items-center justify-content-center text-center">
         <img src="img/nezukoWin.png" alt="Win!" />
+                <div><strong>Score:</strong> <span id="finalScoreWin" class="finalScore"></span></div>
+
         <button id="restartBtn" onclick="restartGame()">Estamos orgulhosos de você! Incendeie o seu coração novamente!</button>
       </div>
-
     </div>
 
    

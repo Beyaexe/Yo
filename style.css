@@ -132,6 +132,13 @@ body{
   font-weight: bolder;
   color: #f77c97;
 }
+.finalScore{
+  font-size: 1.1em;
+  font-weight: bolder;
+  color: #f77c97;
+  margin-bottom: 20%;
+  margin-top: 5%;
+}
 
 #timer{
   margin-bottom: 10%;
@@ -189,7 +196,7 @@ body{
 }
 
 #winContainer img{
-  width: 48%;
+  width: 38%;
   margin-bottom: 5%;
 }
 

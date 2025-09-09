@@ -82,12 +82,10 @@ for (let key in sounds) {
 // Música de fundo
 const backgroundMusic = new Audio("sounds/music.mp3")
 backgroundMusic.loop = true
-backgroundMusic.volume = 0.025
 backgroundMusic.preload = "auto"
 
 // Música game over
 const gameOverMusic = new Audio("sounds/gameOverMusic.mp3")
-gameOverMusic.volume = 0.7
 gameOverMusic.preload = "auto"
 gameOverMusic.load()
 
@@ -119,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // Depois de liberar, já reseta
       gameOverMusic.pause();
       gameOverMusic.currentTime = 0;
-      gameOverMusic.volume = 0.7; // volta volume real
     }).catch(err => console.log("Erro ao preparar áudio:", err));
 
   }, { once: true });
@@ -172,9 +169,9 @@ choicesContainer.addEventListener("click", (e) => {
 
   const text = choiceEl.innerText.trim();
   if (text === currentAnswer) {
-    score++;
-    if (score === Object.keys(hiragana).length) return win()
-
+    score++
+    // if (score === Object.keys(hiragana).length) return win()
+if (score === 4) return win()
     let soundKey = getSound(score);
     if (soundKey) playSound(soundKey); 
 
@@ -189,13 +186,11 @@ choicesContainer.addEventListener("click", (e) => {
     }
 
     scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
-
-    
     sortHiragana()
   } else {
-    imgNezuko.src = "img/nezukoApprehensive.png"
-    playSound('fail')
-    resetGame()
+    // imgNezuko.src = "img/nezukoApprehensive.png"
+    // playSound('fail')
+    // resetGame()
   }
 
 });
@@ -207,6 +202,7 @@ function gameover() {
     backgroundMusic.currentTime = 0;
   }
   setTimeout(() => {
+    gameOverMusic.volume = 1
     gameOverMusic.play();
   }, 200);
 
@@ -214,6 +210,7 @@ function gameover() {
   document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
   .forEach(el => el.style.display = 'none');
   
+  document.getElementById('finalScoreGameOver').innerText = score
   document.getElementById('gameOverContainer').style.display = 'flex';
 }
 
@@ -229,6 +226,7 @@ function win() {
   document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container, #timer, #nezuko')
   .forEach(el => el.style.display = 'none');
   
+  document.getElementById('finalScoreWin').innerText = score
   document.getElementById('winContainer').style.display = 'flex';
 }
 
@@ -237,8 +235,10 @@ function resetGame(){
   for (let key in hiragana) {
     hiragana[key].checked = false
   }
-  score = 0;
-  scoreElement.innerText = `${score}/46`;
+  document.getElementById('finalScoreWin').innerText = ''
+  document.getElementById('finalScoreGameOver').innerText = ''
+  score = 0
+  scoreElement.innerText = `${score}/46`
   sortHiragana()
 }
 
@@ -254,7 +254,6 @@ document.querySelectorAll('#selectedHiragana, #choices, #score, #petal-container
   document.getElementById('winContainer').style.display = 'none'; 
 
   backgroundMusic.loop = true
-  backgroundMusic.volume = 0.085
   backgroundMusic.play()
 
   checkContinue = true
@@ -366,3 +365,4 @@ function timerRun(){
 }
 
 
+//////
