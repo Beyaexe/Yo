@@ -170,8 +170,7 @@ choicesContainer.addEventListener("click", (e) => {
   const text = choiceEl.innerText.trim();
   if (text === currentAnswer) {
     score++
-    // if (score === Object.keys(hiragana).length) return win()
-if (score === 4) return win()
+    if (score === Object.keys(hiragana).length) return win()
     let soundKey = getSound(score);
     if (soundKey) playSound(soundKey); 
 
@@ -188,9 +187,9 @@ if (score === 4) return win()
     scoreElement.innerText = `${score}/${Object.keys(hiragana).length}`;
     sortHiragana()
   } else {
-    // imgNezuko.src = "img/nezukoApprehensive.png"
-    // playSound('fail')
-    // resetGame()
+    imgNezuko.src = "img/nezukoApprehensive.png"
+    playSound('fail')
+    resetGame()
   }
 
 });
